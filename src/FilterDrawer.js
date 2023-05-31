@@ -3,8 +3,9 @@ import { Drawer, InputNumber, Select, Button } from "antd";
 import stays from "./stays.json";
 
 const { Option } = Select;
-// Extract unique locations from stays.json
-const locations = Array.from(new Set(stays.map((stay) => stay.location)));
+const locations = Array.from(
+  new Set(stays.map((stay) => `${stay.city}, ${stay.country}`))
+);
 
 const FilterDrawer = ({ visible, onClose, onFilter }) => {
   return (
@@ -17,13 +18,20 @@ const FilterDrawer = ({ visible, onClose, onFilter }) => {
       <div className="searching-bar">
         <div className="location">
           <label>Location</label>
-          <Select className="selector" placeholder="Location">
-            {locations.map((location, index) => (
-              <Option key={index} value={location}>
-                <span class="material-symbols-outlined">location_on</span>
-                {location}
-              </Option>
-            ))}
+          <Select
+            className="selector"
+            placeholder="Location"
+            dropdownStyle={{ top: "250px" }}
+          >
+            {locations.map((location, index) => {
+              const [city, country] = location.split(", ");
+              return (
+                <Option key={index} value={location}>
+                  <span class="material-symbols-outlined">location_on</span>
+                  {city}, {country}
+                </Option>
+              );
+            })}
           </Select>
         </div>
         <div className="guests">
@@ -36,6 +44,18 @@ const FilterDrawer = ({ visible, onClose, onFilter }) => {
           />
         </div>
       </div>
+      <div className="location-detail">
+        {locations.map((location, index) => {
+          const [city, country] = location.split(", ");
+          return (
+            <li key={index} value={location}>
+              <span class="material-symbols-outlined">location_on</span>
+              {city}, {country}
+            </li>
+          );
+        })}
+      </div>
+
       <Button className="drawer-btn" onClick={onFilter}>
         <span class="material-symbols-outlined">search</span> Search
       </Button>

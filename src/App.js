@@ -3,6 +3,8 @@ import PropertyList from "./PropertyList";
 import FilterDrawer from "./FilterDrawer";
 import logo from "./logo.png";
 import stays from "./stays.json";
+import { Select } from "antd";
+const { Option } = Select;
 
 const App = () => {
   const [filterVisible, setFilterVisible] = useState(false);
@@ -26,8 +28,9 @@ const App = () => {
     // ...
   };
 
-  // Extract unique locations from stays.json
-  const locations = Array.from(new Set(stays.map((stay) => stay.location)));
+  const locations = Array.from(
+    new Set(stays.map((stay) => `${stay.city}, ${stay.country}`))
+  );
 
   return (
     <div>
@@ -36,15 +39,16 @@ const App = () => {
       </header>
       <main>
         <div className="search-bar">
-          <select className="location-select">
-            <option value="">Location</option>
-            {locations.map((location, index) => (
-              <option key={index} value={location}>
-                <span class="material-symbols-outlined">location_on</span>
-                {location}
-              </option>
-            ))}
-          </select>
+          <Select className="location-select" defaultValue="Location">
+            {locations.map((location, index) => {
+              const [city, country] = location.split(", ");
+              return (
+                <Option key={index} value={location}>
+                  {city}, {country}
+                </Option>
+              );
+            })}
+          </Select>
           <input
             className="guest-input"
             type="number"

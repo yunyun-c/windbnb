@@ -17,6 +17,8 @@ const PropertyList = () => {
       {stays.map((stay, index) => (
         <PropertyCard
           key={index}
+          city={stay.city}
+          country={stay.country}
           image={stay.photo}
           title={stay.title}
           rating={stay.rating}

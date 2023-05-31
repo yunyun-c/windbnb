@@ -28,8 +28,9 @@ body {
 
 .material-symbols-outlined {
   font-family: "Material Icons";
-  font-size: 1.3rem;
+  font-size: 0.875rem;
   color: rgba(235, 87, 87, 0.9);
+  background: transparent;
 }
 
 img {
@@ -73,17 +74,39 @@ header {
 .guest-input {
   border: none;
   border-right: 1px solid var(--color-search);
-  padding: 1rem;
+  padding: 0.5rem;
   text-align: center;
 }
 
 .location-select {
   appearance: none;
-  width: 40%;
+  width: 50%;
+}
+
+.location-select span.material-symbols-outlined {
+  font-family: "Material Icons";
+  font-size: 0.875rem;
+  color: rgba(235, 87, 87, 0.9);
+  background: transparent;
+}
+
+.selector .ant-select-arrow,
+.location-select .ant-select-arrow {
+  display: none;
+}
+:where(.css-dev-only-do-not-override-k7429z) .ant-select-focused {
+  border: none;
+}
+:where(.css-dev-only-do-not-override-k7429z)
+  .ant-select:not(.ant-select-disabled):not(.ant-select-customize-input):not(
+    .ant-pagination-size-changer
+  ):hover
+  .ant-select-selector {
+  border: none;
 }
 
 .guest-input {
-  width: 40%;
+  width: 30%;
 }
 .guest-input::placeholder {
   color: var(--color-placehoder);
@@ -102,6 +125,7 @@ header {
 
 button span.material-symbols-outlined {
   align-self: center;
+  font-size: 1.3rem;
 }
 
 /* filterDrawer */
@@ -158,6 +182,33 @@ button span.material-symbols-outlined {
   width: 100%;
 }
 
+.selector .ant-select-dropdown {
+  top: 250px;
+}
+
+:where(.css-dev-only-do-not-override-k7429z).ant-select:not(
+    .ant-select-customize-input
+  )
+  .ant-select-selector {
+  border: none;
+}
+
+.location-detail {
+  list-style-type: none;
+  font-family: "Mulish", sans-serif;
+  line-height: 18px;
+  color: var(--color-stay-rate);
+  margin-bottom: 3rem;
+}
+
+.location-detail li {
+  padding: 0.5rem;
+}
+
+.location-detail span {
+  margin-right: 0.5rem;
+}
+
 .drawer-btn {
   display: flex;
   align-items: center;
@@ -173,6 +224,12 @@ button span.material-symbols-outlined {
 .drawer-btn span.material-symbols-outlined {
   color: var(--color-search);
   margin-right: 0.5rem;
+}
+
+.ant-btn-default:hover + :active {
+  border-color: var(--color-main);
+
+  color: var(--color-rate);
 }
 
 .where {
