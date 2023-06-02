@@ -35,8 +35,8 @@ body {
 
 img {
   width: 100%;
-  max-width: 350px;
-  max-height: 238.35px;
+  max-width: 450px;
+  max-height: 210px;
   border-radius: 24px;
 }
 
@@ -232,11 +232,21 @@ button span.material-symbols-outlined {
   color: var(--color-rate);
 }
 
+.lists-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
 .where {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: baseline;
-  margin: 2rem 0;
+  margin: 2rem 1rem;
+  text-align: center;
+  width: 95%;
 }
 
 h1 {
@@ -252,49 +262,65 @@ p {
   color: var(--color-stay-rate);
 }
 
+.lists {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: baseline;
+  justify-content: center;
+  margin: auto;
+}
+
+.card-img {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .room-detail {
-  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 0.5rem;
 }
 
 h3 {
   font-weight: 600;
   font-size: 0.875rem;
   line-height: 17px;
+  margin: 0 0.5rem;
 }
 
 .room-intro {
   display: flex;
-  width: 100%;
   justify-content: space-between;
   align-items: center;
-  margin: 0.5rem 0;
+  margin: 0.3rem 0.5rem;
+  width: 95%;
 }
 
-.types p,
+.room-intro p,
 .rate {
   font-weight: 500;
   font-size: 0.75rem;
   line-height: 15px;
+  color: var(--color-room);
 }
 
 .superhost {
   border: 1px solid var(--color-stay-rate);
   border-radius: 12px;
-  padding: 0.3rem 0.5rem;
+}
 
+p.superhost {
   font-weight: 700;
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   line-height: 12px;
   text-transform: uppercase;
-
+  padding: 0.2rem 0.5rem;
   color: var(--color-stay-rate);
-}
-
-.types {
-  display: flex;
-}
-.types p {
-  color: var(--color-room);
 }
 .rate {
   display: flex;
@@ -320,4 +346,57 @@ footer p {
   line-height: 17px;
 
   color: var(--color-room);
+}
+
+@media (min-width: 540px) {
+  .search-bar {
+    width: 70%;
+    margin: auto;
+  }
+  .lists-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .lists {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .card-img img {
+    height: 150px;
+  }
+
+  .room-detail {
+    width: 45%;
+  }
+
+  .room-intro {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 95%;
+  }
+
+  p.superhost {
+    padding: 0.2rem 0.4rem;
+  }
+
+  .types {
+    width: 100%;
+  }
+}
+@media (min-width: 768px) {
+  .room-detail {
+    width: 300px;
+  }
+}
+
+@media (min-width: 920px) {
+  .where {
+    width: 85%;
+  }
+  .room-detail {
+    width: 300px;
+  }
 }
