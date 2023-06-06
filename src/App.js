@@ -1,75 +1,40 @@
-import React, { useState, useEffect } from "react";
-import PropertyList from "./PropertyList";
-import FilterDrawer from "./FilterDrawer";
+import React, { useState } from "react";
+import PropertyList from "./components/PropertyList";
+import FilterDrawer from "./components/FilterDrawer";
+import staysData from "./stays.json";
 import logo from "./logo.png";
-import stays from "./stays.json";
-import { Select } from "antd";
-const { Option } = Select;
 
-const App = () => {
-  const [filterVisible, setFilterVisible] = useState(false);
-  const [properties, setProperties] = useState([]);
+function App() {
+  const [filter, setFilter] = useState({ location: "", guests: null });
 
-  useEffect(() => {
-    setProperties(stays);
-  }, []);
-
-  const handleOpenFilter = () => {
-    setFilterVisible(true);
+  const handleFilterChange = (newFilter) => {
+    setFilter(newFilter);
   };
 
-  const handleCloseFilter = () => {
-    setFilterVisible(false);
-  };
-
-  const handleFilter = () => {
-    // Perform filtering logic based on location and number of guests
-    // Update the properties state with filtered data
-    // ...
-  };
-
-  const locations = Array.from(
-    new Set(stays.map((stay) => `${stay.city}, ${stay.country}`))
-  );
+  const filteredStays = staysData.filter((stay) => {
+    const isLocationMatch = filter.location
+      ? stay.city.toLowerCase() === filter.location.toLowerCase()
+      : true;
+    const isGuestsMatch = filter.guests
+      ? stay.maxGuests >= filter.guests
+      : true;
+    return isLocationMatch && isGuestsMatch;
+  });
 
   return (
-    <div>
+    <div className="App">
       <header>
-        <img src={logo} alt="Windbnb logo" className="header-img" />
-      </header>
-      <main>
-        <div className="search-bar">
-          <Select className="location-select" defaultValue="Location">
-            {locations.map((location, index) => {
-              const [city, country] = location.split(", ");
-              return (
-                <Option key={index} value={location}>
-                  {city}, {country}
-                </Option>
-              );
-            })}
-          </Select>
-          <input
-            className="guest-input"
-            type="number"
-            placeholder="Add Guests"
-          />
-          <button className="btn-main-search" onClick={handleOpenFilter}>
-            <span className="material-symbols-outlined ">search</span>
-          </button>
+        <div className="logo-img">
+          <img src={logo} alt="logo" />
         </div>
-        <PropertyList properties={properties} />
-        <FilterDrawer
-          visible={filterVisible}
-          onClose={handleCloseFilter}
-          onFilter={handleFilter}
-        />
-      </main>
-      <footer>
-        <p>created by yunyun-c - devChallenges.io</p>
-      </footer>
+      </header>
+      <FilterDrawer filter={filter} onFilterChange={handleFilterChange} />
+      <div className="property-list-info">
+        <span>{filteredStays.length} properties found</span>
+      </div>
+      <PropertyList properties={filteredStays} />
     </div>
   );
-};
+}
 
 export default App;
